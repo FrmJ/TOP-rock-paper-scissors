@@ -6,3 +6,6 @@ const getHumanChoice = () => {
     const promptText = "Choose a number corresponding to the option:\nRock - 0\nPaper - 1\nScissor - 2";
     return parseInt(prompt(promptText));
 };
+
+let humanScore = 0;
+let computerScore = 0;
