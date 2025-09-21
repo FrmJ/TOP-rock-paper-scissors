@@ -30,10 +30,29 @@ const playRound = (humanChoice, computerChoice) => {
     }
 }
 
+const playGame = () => {
+    for ( let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+    }
+
+    const scores = `Player Score: ${humanScore}\nComputer Score: ${computerScore}`;
+    console.log(scores);
+
+    if (humanScore === computerScore) {
+        console.log("Game is a draw!");
+        return;
+    }
+
+    if (humanScore > computerScore) {
+        console.log("Player wins the game!");
+    } else {
+        console.log("Computer wins the game!");
+    }
+}
+
 let humanScore = 0;
 let computerScore = 0;
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
-playRound(humanChoice, computerChoice);
+playGame();
