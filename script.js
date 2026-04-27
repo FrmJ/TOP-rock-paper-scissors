@@ -2,14 +2,15 @@ const getComputerChoice = () => {
     return Math.floor(Math.random() * 3);
 };
 
-const getHumanChoice = () => {
-    const promptText = "Choose a number corresponding to the option:\nRock - 0\nPaper - 1\nScissor - 2";
-    return parseInt(prompt(promptText));
-};
+// const getHumanChoice = () => {
+//     const promptText = "Choose a number corresponding to the option:\nRock - 0\nPaper - 1\nScissor - 2";
+//     return parseInt(prompt(promptText));
+// };
 
-const playRound = (humanChoice, computerChoice) => {
+const playRound = (humanChoice) => {
     const choices = ["Rock", "Paper", "Scissors"];
-    console.log(`Player chose: ${choices[humanChoice]}`);
+    const computerChoice = getComputerChoice();
+    console.log(`Player chose: ${choices[parseInt(humanChoice)]}`);
     console.log(`Computer chose: ${choices[computerChoice]}`);
 
     if (humanChoice === computerChoice) {
@@ -36,6 +37,14 @@ const playGame = () => {
     //     const computerChoice = getComputerChoice();
     //     playRound(humanChoice, computerChoice);
     // }
+    const btns = document.querySelectorAll("button");
+    
+    btns.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            playRound(e.target.dataset.choice);
+            console.log(e.target.dataset.choice);
+        });
+    })
 
     const scores = `Player Score: ${humanScore}\nComputer Score: ${computerScore}`;
     console.log(scores);
