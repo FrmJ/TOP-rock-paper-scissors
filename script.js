@@ -1,3 +1,5 @@
+const choices = ["Rock", "Paper", "Scissors"];
+
 const getComputerChoice = () => {
     return Math.floor(Math.random() * 3);
 };
@@ -7,11 +9,41 @@ const getComputerChoice = () => {
 //     return parseInt(prompt(promptText));
 // };
 
+const updateScore = (winner) => {
+    if (winner === "player") {
+        humanScore++;
+        displayUpdateScore(winner, humanScore);
+    } else {
+        computerScore++;
+        displayUpdateScore(winner, computerScore);
+    }
+}
+
+const displayUpdateScore = (winner, points) => {
+    const score = document.querySelector(`p.${winner} > span`);
+    console.log(score + "asd");
+    score.innerText = points;
+    displayRoundWinner(winner);
+}
+
+const displayRoundWinner = (winner) => {
+    if (document.querySelector("p.round-winner")) {
+        const roundWinner = document.querySelector("p.round-winner");
+        roundWinner.innerText = `${winner} wins!`;
+    } else {
+        const body = document.querySelector("body");
+        const roundWinner = document.createElement("p");
+        roundWinner.className = "round-winner";
+        roundWinner.innerText = `${winner} wins!`;
+        body.appendChild(roundWinner);
+    }
+}
+
 const playRound = (humanChoice) => {
-    const choices = ["Rock", "Paper", "Scissors"];
     const computerChoice = getComputerChoice();
     console.log(`Player chose: ${choices[parseInt(humanChoice)]}`);
     console.log(`Computer chose: ${choices[computerChoice]}`);
+
 
     if (humanChoice === computerChoice) {
         console.log("It's a draw");
@@ -21,15 +53,15 @@ const playRound = (humanChoice) => {
     const result = (humanChoice - computerChoice + 3) % 3;
 
     if (result === 1) {
-        humanScore++;
+        // humanScore++;
+        updateScore("player");
         console.log(`Player wins! ${choices[humanChoice]} beats ${choices[computerChoice]}!`);
-        return;
     } else {
-        computerScore++;
+        // computerScore++;
+        updateScore("computer");
         console.log(`Computer wins! ${choices[computerChoice]} beats ${choices[humanChoice]}!`);
-        return;
     }
-}
+};
 
 const playGame = () => {
     // for ( let i = 0; i < 5; i++) {
@@ -37,12 +69,12 @@ const playGame = () => {
     //     const computerChoice = getComputerChoice();
     //     playRound(humanChoice, computerChoice);
     // }
+
     const btns = document.querySelectorAll("button");
     
     btns.forEach(btn => {
         btn.addEventListener("click", function (e) {
             playRound(e.target.dataset.choice);
-            console.log(e.target.dataset.choice);
         });
     })
 
@@ -59,7 +91,7 @@ const playGame = () => {
     } else {
         console.log("Computer wins the game!");
     }
-}
+};
 
 let humanScore = 0;
 let computerScore = 0;
