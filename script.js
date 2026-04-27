@@ -31,11 +31,11 @@ const playRound = (humanChoice, computerChoice) => {
 }
 
 const playGame = () => {
-    for ( let i = 0; i < 5; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
-    }
+    // for ( let i = 0; i < 5; i++) {
+    //     const humanChoice = getHumanChoice();
+    //     const computerChoice = getComputerChoice();
+    //     playRound(humanChoice, computerChoice);
+    // }
 
     const scores = `Player Score: ${humanScore}\nComputer Score: ${computerScore}`;
     console.log(scores);
