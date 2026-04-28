@@ -9,6 +9,31 @@ const getComputerChoice = () => {
 //     return parseInt(prompt(promptText));
 // };
 
+const checkWinner = () => {
+    let winner = "";
+    if (humanScore === 5) {
+        winner = "player";
+    }
+    if (computerScore === 5) {
+        winner = "computer";
+    }
+
+    if (computerScore === 5 || humanScore === 5) {
+        alert(`${winner} wins the game!`);
+        resetScore();
+    }
+};
+
+const resetScore = () => {
+    humanScore = 0;
+    computerScore = 0;
+    displayUpdateScore("player", 0);
+    displayUpdateScore("computer", 0);
+
+    const roundWinner = document.querySelector("p.round-winner");
+    roundWinner.innerText = "";
+};
+
 const updateScore = (winner) => {
     if (winner === "player") {
         humanScore++;
@@ -17,27 +42,27 @@ const updateScore = (winner) => {
         computerScore++;
         displayUpdateScore(winner, computerScore);
     }
-}
+
+    displayRoundWinner(winner);
+};
 
 const displayUpdateScore = (winner, points) => {
     const score = document.querySelector(`p.${winner} > span`);
-    console.log(score + "asd");
     score.innerText = points;
-    displayRoundWinner(winner);
-}
+};
 
 const displayRoundWinner = (winner) => {
     if (document.querySelector("p.round-winner")) {
         const roundWinner = document.querySelector("p.round-winner");
-        roundWinner.innerText = `${winner} wins!`;
+        roundWinner.innerText = `${winner} wins the round!`;
     } else {
         const body = document.querySelector("body");
         const roundWinner = document.createElement("p");
         roundWinner.className = "round-winner";
-        roundWinner.innerText = `${winner} wins!`;
+        roundWinner.innerText = `${winner} wins the round!`;
         body.appendChild(roundWinner);
     }
-}
+};
 
 const playRound = (humanChoice) => {
     const computerChoice = getComputerChoice();
@@ -61,6 +86,8 @@ const playRound = (humanChoice) => {
         updateScore("computer");
         console.log(`Computer wins! ${choices[computerChoice]} beats ${choices[humanChoice]}!`);
     }
+
+    checkWinner();
 };
 
 const playGame = () => {
