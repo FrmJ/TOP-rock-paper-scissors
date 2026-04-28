@@ -4,11 +4,6 @@ const getComputerChoice = () => {
     return Math.floor(Math.random() * 3);
 };
 
-// const getHumanChoice = () => {
-//     const promptText = "Choose a number corresponding to the option:\nRock - 0\nPaper - 1\nScissor - 2";
-//     return parseInt(prompt(promptText));
-// };
-
 const checkWinner = () => {
     let winner = "";
     if (humanScore === 5) {
@@ -78,11 +73,9 @@ const playRound = (humanChoice) => {
     const result = (humanChoice - computerChoice + 3) % 3;
 
     if (result === 1) {
-        // humanScore++;
         updateScore("player");
         console.log(`Player wins! ${choices[humanChoice]} beats ${choices[computerChoice]}!`);
     } else {
-        // computerScore++;
         updateScore("computer");
         console.log(`Computer wins! ${choices[computerChoice]} beats ${choices[humanChoice]}!`);
     }
@@ -91,11 +84,6 @@ const playRound = (humanChoice) => {
 };
 
 const playGame = () => {
-    // for ( let i = 0; i < 5; i++) {
-    //     const humanChoice = getHumanChoice();
-    //     const computerChoice = getComputerChoice();
-    //     playRound(humanChoice, computerChoice);
-    // }
 
     const btns = document.querySelectorAll("button");
     
